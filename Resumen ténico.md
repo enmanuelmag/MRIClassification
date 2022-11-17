@@ -29,10 +29,12 @@ La arquitectura se compone de los siguiente:
   - Capa densa clasificadora con N neuronas (N = número de clases)
 
 ### Resultados de los entrenamientos
+```
 train_loss: 0.26158565282821655
 train_acc: 0.8915525078773499
 val_loss: 0.5042849779129028
 val_acc: 0.7978723645210266
+```
 
 ![Matrix de confusión](imgs/confusion_matrix_transformers_best.jpg)
 
