@@ -1,0 +1,1 @@
+{"model_type": "vit", "input_shape": [197, 233, 189], "mlp_class": [64], "lr": 0.0001, "batch": 32, "use_aug": false, "ds_slices": false, "transformer_layers": 6, "patch_size": 10, "conv_front": true, "num_patches": 361, "projection_dim": 64, "num_heads": 2, "transformer_units": [128, 64], "dropout_rate": 0.25}

@@ -1,0 +1,4 @@
+*.tfrecord
+data/
+*.h5
+logs/
