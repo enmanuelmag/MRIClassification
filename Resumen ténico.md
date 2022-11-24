@@ -10,13 +10,13 @@ Indistintamente del modelo, las especificaciones de las instancias siempre fuero
 ## Modelo basado en transformers
 La arquitectura se compone de los siguiente:
 
-> Note: projection_dim = 256, patch_size = 10, num_patch = 361
+> Note: **projection_dim** = 256, **patch_size** = 10, **num_patch** = 361
 
 - Encoder:
-  - Primera Capa de convolución 3D. Filtros projection_dim * 8 Kernel = patch_size, stride = patch_size, padding = 'same', Activation = 'relu'
-  - Segunda Capa de convolución 3D. Filtros projection_dim * 4 Kernel = patch_size, stride = patch_size, padding = 'same', Activation = 'relu'
-  - Tercera Capa de convolución 3D. Filtros projection_dim * 2 Kernel = patch_size, stride = patch_size, padding = 'same', Activation = 'relu'
-  - Cuarta Capa de convolución 3D.  Filtros projection_dim * 1 Kernel = patch_size, stride = patch_size, padding = 'same', Activation = 'relu'
+  - Primera Capa de convolución 3D. Filtros projection_dim * 8, Kernel = patch_size, stride = patch_size, padding = 'same', Activation = 'relu'
+  - Segunda Capa de convolución 3D. Filtros projection_dim * 4, Kernel = patch_size, stride = patch_size, padding = 'same', Activation = 'relu'
+  - Tercera Capa de convolución 3D. Filtros projection_dim * 2, Kernel = patch_size, stride = patch_size, padding = 'same', Activation = 'relu'
+  - Cuarta Capa de convolución 3D.  Filtros projection_dim * 1, Kernel = patch_size, stride = patch_size, padding = 'same', Activation = 'relu'
   - Codificación posicional de los patches creados por las capas anteriores
   - 18 capas de transformadores con las siguientes especificaciones:
     - 4 cabezas
