@@ -85,4 +85,13 @@ Se agruparan las capas para una mejor comprensión de la arquitectura:
 15. Capa 15: Linear con neuronas = número de clases
 
 
+### Resultados de los entrenamientos
+```
+Best Epoch: 99
+Best train loss: 1.1192
+Best test loss: 1.3018
+Best train accuracy: 0.7839
+Best test accuracy: 0.5971
+```
+
 ![Matrix de confusión ResNet (Conv)](imgs/confusion_matrix_convtorch.png)
