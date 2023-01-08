@@ -36,8 +36,53 @@ val_loss: 0.5042849779129028
 val_acc: 0.7978723645210266
 ```
 
-![Matrix de confusión](imgs/confusion_matrix_transformers_best.jpg)
+![Matrix de confusión Transformer](imgs/confusion_matrix_transformers_best.jpg)
 
 ## Modelo basado en convolución
 
-<DESCRIBIR_EL_MODELO>
+Se compone de 20 capas compuestos de bloques llamados ResBlock, seguidos al final de una capa de AveragePool3D y una MLP de 3 capas con 55296, 256 y 256 neuronas respectivamente.
+
+Del bloque ResBlock existen dos tipo cuya unica diferencia son las 2 primeras capas, las cuales se distinguen a continuación:
+
+- Tipo Downsample:
+  - Una capa de Convolucion 3D de kernel 1x1x1, stride 2x2x2, padding 0 y la cantidad de filtros es parametrizada en cada capa (se describe mas adelante).
+  - Una capa BatchNormalization3D, a esta salida la llamaremos shortcut.
+  - Una capa de Convolucion 3D de kernel 3x3x3, stride 2x2x2, padding 1 y la cantidad de filtros es parametrizada en cada capa (se describe mas adelante).
+  - Una capa BatchNormalization3D
+  - Una capa ReLU
+  - Una capa Convolucion 3D de kernel 3x3x3, stride 1x1x1, padding 1x1x1 y la cantidad de filtros es parametrizada en cada capa (se describe mas adelante).
+  - Una capa BatchNormalization3D
+  - Una capa ReLU
+  - Se suma la salida de la capa anterior con el valor guardado en la variable shortcut.
+  - Una capa ReLU
+  
+- Tipo Upsample (el input de esta capa se lo conocera directamente como shortcut):
+  - Una capa Convolucion 3D de kernel 3x3x3, stride 1x1x1, padding 1 y la cantidad de filtros es parametrizada en cada capa (se describe mas adelante).
+  - Una capa BatchNormalization3D
+  - Una capa ReLU
+  - Una capa Convolucion 3D de kernel 3x3x3, stride 1x1x1, padding 1 y la cantidad de filtros es parametrizada en cada capa (se describe mas adelante).
+  - Una capa BatchNormalization3D
+  - Una capa ReLU
+  - Se suma la salida de la capa anterior con el valor guardado en la variable shortcut.
+  - Una capa ReLU
+
+Se agruparan las capas para una mejor comprensión de la arquitectura:
+
+1. Capa 1: Convolucion 3D de kernel 3x3x3, stride 1x1x1, padding 1 y 32 filtros, MaxPool3D de kernel 2x2x2, stride 1x1x1, padding 1. BatchNormalization3D y ReLU.
+2. Capa 2: Conformada por dos ResBlock de tipo UpSample con 32 filtros.
+3. Capa 3: Conformada por dos ResBlock de tipo UpSample con 32 filtros.
+4. Capa 4: Conformada por una ResBlock de tipo DownSample con 32 filtros y otra de tipo UpSample con 32 filtros.
+5. Capa 5: Conformada por dos ResBlock de tipo UpSample con 32 filtros.
+6. Capa 6: Conformada por dos ResBlock de tipo UpSample con 32 filtros.
+7. Capa 7: Conformada por una ResBlock de tipo DownSample con 32 filtros y otra de tipo UpSample con 32 filtros.
+8. Capa 8: Conformada por dos ResBlock de tipo UpSample con 32 filtros.
+9. Capa 9: Conformada por dos ResBlock de tipo UpSample con 32 filtros.
+10. Capa 10: Conformada por una ResBlock de tipo DownSample con 32 filtros y otra de tipo UpSample con 32 filtros.
+11. Capa 11: Conformada por dos ResBlock de tipo UpSample con 32 filtros.
+12. Capa 12: AveragePool3D
+13. Capa 13: Linear con 256 neuronas
+14. Capa 14: Linear con 256 neuronas
+15. Capa 15: Linear con neuronas = número de clases
+
+
+![Matrix de confusión ResNet (Conv)](imgs/confusion_matrix_convtorch.png)

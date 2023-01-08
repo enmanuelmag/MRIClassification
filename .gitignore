@@ -1,5 +1,6 @@
 *.tfrecord
 data/
 *.h5
+*.pth
 logs/
 history.pkl
